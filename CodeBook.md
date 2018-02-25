@@ -47,7 +47,7 @@ These summarise the process steps implemented in the run_analysis.R script:
 
 <b>master_table</b> is a temporary data table which will contain the merged 'test' and 'train' data set.
 
-<b>tidy_table</> will contain the tidy data set.
+<b>tidy_table</b> will contain the tidy data set.
 
 ### Returns
 A tidy data as a data frame is returned with four columns:
