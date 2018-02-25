@@ -50,7 +50,7 @@ These summarise the process steps implemented in the run_analysis.R script:
 <b>tidy_table</b> will contain the tidy data set.
 
 ### Returns
-A tidy data as a data frame is returned with four columns:
+A tidy data set is returned with four columns:
 * <b>subject</b> - the id for the subject that performed the activity
 * <b>activity</b> - the name of the activity performed by the subject
 * <b>measurement</b> - the measurement for the activity which is either the mean or standard deviation for the measurement
