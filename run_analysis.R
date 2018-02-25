@@ -35,54 +35,50 @@ run_analysis <- function(parent_path) {
             print("Create data frame with subject.")
             
             # Create the temp data frame using the "subject" dataset and update the column name
-            dataset_item_path <- paste(sep = "", dataset_path, "/subject_", dataset_partition, ".txt")
-            dataset_df <- read.table(dataset_item_path, header = FALSE)
-            names(dataset_df) <- "subject"
+            dataset_file_path <- paste(sep = "", dataset_path, "/subject_", dataset_partition, ".txt")
+            dataset_table <- read.table(dataset_file_path, header = FALSE)
+            names(dataset_table) <- "subject"
             
-            print(paste("CBind activity IDs for", length(dataset_df[,1]), dataset_partition, "records."))
+            print(paste("CBind activity IDs for", length(dataset_table[,1]), dataset_partition, "records."))
             
             # cbind the activity IDs
-            dataset_item_path <- paste(sep = "", dataset_path, "/y_", dataset_partition, ".txt")
-            dataset_df <- cbind(dataset_df, read.table(dataset_item_path, header = FALSE))
-            names(dataset_df)[length(dataset_df)] <- "activity_id"
+            dataset_file_path <- paste(sep = "", dataset_path, "/y_", dataset_partition, ".txt")
+            dataset_table <- cbind(dataset_table, read.table(dataset_file_path, header = FALSE))
+            names(dataset_table)[length(dataset_table)] <- "activity_id"
             
             print("Merge activity labels.")
             
             # Merge the activity labels
-            dataset_df <- merge(x = activity_labels, y = dataset_df, by.x = "activity_id", by.y = "activity_id")
+            dataset_table <- merge(x = activity_labels, y = dataset_table, by.x = "activity_id", by.y = "activity_id")
             
             print(paste("Create temp data frame for", dataset_partition, " dataset."))
             
-            # Obtain the data set for the type and put into a temp data frame
-            dataset_item_path <- paste(sep = "", dataset_path, "/X_", dataset_partition, ".txt")
-            temp_df <- read.table(dataset_item_path, header = FALSE)[, features_mean_sd_colfilter]
-            names(temp_df) <- features_mean_sd_colnames
+            # Obtain the test or training (X_) data set and put into a temp data table
+            dataset_file_path <- paste(sep = "", dataset_path, "/X_", dataset_partition, ".txt")
+            dataset_X_table <- read.table(dataset_file_path, header = FALSE)[, features_mean_sd_colfilter]
+            names(dataset_X_table) <- features_mean_sd_colnames
             
             print("CBind temp to master data frame")
             
             # cbind the temp data frame to the master data frame.
-            dataset_df <- cbind(dataset_df, temp_df)
+            dataset_table <- cbind(dataset_table, dataset_X_table)
             
             if (dataset_partition == "test") {
-                master_df <- dataset_df
+                master_table <- dataset_table
             } else {
-                master_df <- rbind(master_df, dataset_df)
+                master_table <- rbind(master_table, dataset_table)
             }
         }
         
         print("*****")
         print("Generating tidy data.")
         
-        tidy_df <-  master_df %>%
+        tidy_table <-  master_table %>%
                         gather(measurement, measurement_value, -activity_id, -activity, -subject) %>% 
                             group_by(subject, activity, measurement) %>%
                                 summarize(measurement_mean = mean(measurement_value))
         
-        print("Done")
-        tidy_df
+        print("Tidy Data Generated")
+        tidy_table
     }
 }
-
-
-parent_path <- "./UCI HAR Dataset"
-tidy_df <- run_analysis(parent_path)
