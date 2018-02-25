@@ -4,10 +4,10 @@
 
 This script contains the function:  run_analysis(parent_path)
 
-### Purpose
+## Purpose
 To merge the training and test data sets from the experiment and to product a tidy data set that can be used for later analysis.
 
-### The Process for Data Transformation
+## The Process for Data Transformation
 These summarise the process steps implemented in the run_analysis.R script:
 
 1. Validate the parent_path to ensure it contains both train and test sub paths and the features and activity_labels text files.
@@ -19,7 +19,7 @@ These summarise the process steps implemented in the run_analysis.R script:
 7. In the next loop, the function reads the files subject_train, X_train and y_train and the data columns are merged and these entire data set is appended to the 'test' data.
 8. The data frame is then converted to a tall data with subject, activity, measurement and measurement_mean columns. The measurement column contains the names of the measurement columns from the original data set.  The measurement_mean column contains the mean of each of the measurement columns.
 
-### The Variables
+## The Variables
 <b>parent_path</b> is the path which contains the following:
 * <b>'test'</b> and <b>'train'</b> folders which contain the experiment results
 * <b>'activity_labels.txt'</b> which contain the activity id and activity names
@@ -57,8 +57,6 @@ A tidy data set is returned with four columns:
 * <b>measurement_mean</b> - the mean of the measurements' mean or standard deviation
 
 ## The Data
-
-### Data Files Required
 The run_analysis function will obtain the following files in the specific folder:
 
 * <b>parent_path</b> folder:
