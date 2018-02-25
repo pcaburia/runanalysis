@@ -56,7 +56,7 @@ A tidy data set is returned with four columns:
 * <b>measurement</b> - the measurement for the activity which is either the mean or standard deviation for the measurement
 * <b>measurement_mean</b> - the mean of the measurements' mean or standard deviation
 
-## The Data
+## About the Data Files Required
 The run_analysis function will obtain the following files in the specific folder:
 
 * <b>parent_path</b> folder:
