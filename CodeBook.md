@@ -27,7 +27,27 @@ These summarise the process steps implemented in the run_analysis.R script:
 
 <b>activity_labels</b> is a data table containing the data from the activity_labels.txt file.
 
-<b>features</> is a data table containing the data from teh features.txt file.
+<b>features</b> is a data table containing the data from teh features.txt file.
+
+<b>features_mean_sd_colfilter</b> is a vector containing TRUE or FALSE.  TRUE if the measurement name contains either 'mean( or 'std('.  This is used to identify the columns for the measurements for the mean and standard deviation. Note, the grepl expression includes the open parenthesis '(' to ensure that measurements are for mean and std (standard deviation) only.
+
+<b>features_mean_sd_colnames</b> is a vector containing the names of the measurements for the mean and standard deviations.
+
+<b>dataset_partitions</b> is a vector containing 'test' or 'train' and is used in the 'for' loop.
+
+<b>dataset_partition</b> is a either a 'test' or 'train' and is used in the 'for' loop to identify the sub folder containing the test or train data sets.
+
+<b>dataset_path</b> is the path containing the measurements files that are prefixed with subject_, X_, y_ .
+
+<b>dataset_file_path</b> is the full path to the measurement file. 
+
+<b>dataset_table</b> is a temporary data table for which the subject_, X_, and y_ files will be merged into.
+
+<b>dataset_X_table</b> is a temporary data table containing test or training (X_) data set.
+
+<b>master_table</b> is a temporary data table which will contain the merged 'test' and 'train' data set.
+
+<b>tidy_table</> will contain the tidy data set.
 
 ### Returns
 A tidy data as a data frame is returned with four columns:
